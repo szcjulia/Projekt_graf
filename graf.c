@@ -104,14 +104,25 @@ int usun_sasiada(Wierzcholek *wierzcholek1, Wierzcholek *wierzcholek2)
     if(!czy_sasiad(wierzcholek1, wierzcholek2->etykieta)) return RM_NEIGH_FAIL;
 
     Sasiad *obecnySasiad = wierzcholek1->pierwszy_sasiad;
+    Sasiad *poprzedniSasiad = NULL;
 
     while(obecnySasiad){
         if(obecnySasiad->wierzcholek->etykieta == wierzcholek2->etykieta){
-            obecnySasiad = obecnySasiad->nastepny_sasiad;
-            wierzcholek1->pierwszy_sasiad = obecnySasiad->nastepny_sasiad;
+            if (poprzedniSasiad)
+            {
+                poprzedniSasiad->nastepny_sasiad = obecnySasiad->nastepny_sasiad;
+            }
+            else
+            {
+                wierzcholek1->pierwszy_sasiad = obecnySasiad->nastepny_sasiad;
+            }
+
             free(obecnySasiad);
             return RM_NEIGH_SUCCESS;
         }
+
+        poprzedniSasiad = obecnySasiad;
+        obecnySasiad = obecnySasiad->nastepny_sasiad;
     }
     return RM_NEIGH_FAIL;
 }
@@ -122,8 +133,6 @@ int usun_krawedz(Wierzcholek *pierwszy, uint32_t etWie1, uint32_t etWie2){
     Wierzcholek *wierzcholek2 = znajdz_wierzcholek(pierwszy, etWie2);
 
     if(!(wierzcholek1 && wierzcholek2)) return RM_NEIGH_FAIL;
-
-    if(!(czy_sasiad(wierzcholek1, wierzcholek2->etykieta) && czy_sasiad(wierzcholek2, wierzcholek1->etykieta))) return RM_EDGE_FAIL;
 
     if(usun_sasiada(wierzcholek1, wierzcholek2) == RM_NEIGH_SUCCESS && usun_sasiada(wierzcholek2, wierzcholek1) == RM_NEIGH_SUCCESS)
         return RM_EDGE_SUCCESS;
