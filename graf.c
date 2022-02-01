@@ -187,3 +187,13 @@ int usun_wierzcholek(Wierzcholek **pierwszy, uint32_t etykieta_usun){
     }
     return RM_NODE_FAIL;
 }
+
+void lista(Wierzcholek *pierwszy_wierzcholek)
+{
+    Wierzcholek *obecny_wierzcholek = pierwszy_wierzcholek;
+    while(obecny_wierzcholek)
+    {
+        printf("%lu\n", obecny_wierzcholek->etykieta);
+        obecny_wierzcholek = obecny_wierzcholek->nastepny_wierzcholek;
+    }
+}

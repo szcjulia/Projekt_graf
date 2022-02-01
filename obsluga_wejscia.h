@@ -13,11 +13,15 @@
 #define KOLOR 3
 #define US_KRA 4
 #define US_WIE 5
+#define P_BIN 6
+#define LIST 7
 
 #define EXIT 9
 #define DODAJ 10
 #define KOLORUJ 11
 #define USUN 12
+#define BIN 13
+#define LISTA 14
 
 char* usuwanie_spacji(char* linijka);
 char* zamiana_interpunkcji_na_spacje(char* linijka);

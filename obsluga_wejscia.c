@@ -110,6 +110,19 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2, char* nazwaPl
                     }
                     *opcja = NIEPRAWIDLOWY_INPUT;
                     break;
+                case BIN:
+                    if (2 == sscanf(linia, "%s %s", slowo, nazwaPliku)){
+                        *opcja = P_BIN;
+                        return;
+                    }
+                    *opcja = NIEPRAWIDLOWY_INPUT;
+                    break;
+                case LISTA:
+                    if (1 == sscanf(linia, "%s", slowo)){
+                        *opcja = LIST;
+                        return;
+                    }
+                    *opcja = NIEPRAWIDLOWY_INPUT;
                 default:
                     *opcja = NIEPRAWIDLOWY_INPUT;
                     break;
@@ -124,6 +137,8 @@ int czytaj_opcje(char* slowo)
     if (!strcmp(slowo, "A")) return DODAJ; 
     if (!strcmp(slowo, "Colors")) return KOLORUJ; 
     if (!strcmp(slowo, "D")) return USUN;
+    if (!strcmp(slowo, "Bin")) return BIN;
+    if (!strcmp(slowo, "List")) return LISTA;
 
     else return NIEPRAWIDLOWY_INPUT;
 }

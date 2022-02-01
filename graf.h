@@ -33,5 +33,6 @@ int dodaj_krawedz(Wierzcholek* pierwszy, uint32_t etykieta_wierzcholka1, uint32_
 int usun_wierzcholek(Wierzcholek **pierwszy, uint32_t etykieta_usun);
 int usun_sasiada(Wierzcholek *wierzcholek1, Wierzcholek *wierzcholek2);
 int usun_krawedz(Wierzcholek *pierwszy, uint32_t etWie1, uint32_t etWie2);
+void lista(Wierzcholek* pierwszy);
 
-#endif //GRAF_H
+#endif

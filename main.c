@@ -7,6 +7,7 @@
 #include "graf.h"
 #include "obsluga_wejscia.h"
 #include "kolorowanie.h"
+#include "binar.h"
 
 int main(){
 
@@ -23,13 +24,13 @@ int main(){
         switch (opcja)
         {
             case DOD_WIE:
-                if(dodaj_wierzcholek(&pierwszy, etWie1) == ADD_NODE_FAIL) printf("Fail\n");
-                else printf("Success\n");
+                if(dodaj_wierzcholek(&pierwszy, etWie1) == ADD_NODE_FAIL) printf("Nie powiodlo sie\n");
+                else printf("Udalo sie\n");
                 break;
 
             case DOD_KRA:
-                if(dodaj_krawedz(pierwszy, etWie1, etWie2) == ADD_EDGE_FAIL) printf("Fail\n");
-                else printf("Success\n");
+                if(dodaj_krawedz(pierwszy, etWie1, etWie2) == ADD_EDGE_FAIL) printf("Nie powiodlo sie\n");
+                else printf("Udalo sie\n");
                 break;
 
             case KOLOR:
@@ -37,15 +38,23 @@ int main(){
                 break;
 
             case US_KRA:
-                if(usun_krawedz(pierwszy, etWie1, etWie2) == RM_EDGE_FAIL) printf("Fail\n");
-                else printf("Success\n");
+                if(usun_krawedz(pierwszy, etWie1, etWie2) == RM_EDGE_FAIL) printf("Nie powiodlo sie\n");
+                else printf("Udalo sie\n");
                 break;
 
             case US_WIE:
-                if(usun_wierzcholek(&pierwszy, etWie1) == RM_NODE_FAIL) printf("Fail\n");
-                else printf("Success\n");
+                if(usun_wierzcholek(&pierwszy, etWie1) == RM_NODE_FAIL) printf("Nie powiodlo sie\n");
+                else printf("Udalo sie\n");
                 break;
 
+            case P_BIN:
+                zapisz_bin(pierwszy, nazwaPliku);
+                break;
+
+            case LIST:
+                lista(pierwszy);
+                break;
+                
             case EXIT:
                 return(0);
                 break;
