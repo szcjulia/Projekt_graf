@@ -156,15 +156,24 @@ int usun_wierzcholek(Wierzcholek **pierwszy, uint32_t etykieta_usun){
     }
 
     obecny_wierzcholek = *pierwszy;
+    Wierzcholek* poprzedni_wierzcholek = NULL;
     while(obecny_wierzcholek)
     {
         if(obecny_wierzcholek == wierzcholek_usun)
         {
-            *pierwszy = wierzcholek_usun->nastepny_wierzcholek;
+            if (poprzedni_wierzcholek)
+            {
+                poprzedni_wierzcholek->nastepny_wierzcholek = wierzcholek_usun->nastepny_wierzcholek;
+            }
+            else
+            {
+                *pierwszy = wierzcholek_usun->nastepny_wierzcholek;
+            }
             free(wierzcholek_usun);
             return RM_NODE_SUCCESS;
         }
 
+        poprzedni_wierzcholek = obecny_wierzcholek;
         obecny_wierzcholek = obecny_wierzcholek->nastepny_wierzcholek;
     }
     return RM_NODE_FAIL;

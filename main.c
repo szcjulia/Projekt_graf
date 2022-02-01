@@ -37,12 +37,12 @@ int main(){
                 break;
 
             case US_KRA:
-                if(usun_krawedz(&pierwszy, etWie1, etWie2) == RM_EDGE_FAIL) printf("Fail\n");
+                if(usun_krawedz(pierwszy, etWie1, etWie2) == RM_EDGE_FAIL) printf("Fail\n");
                 else printf("Success\n");
                 break;
 
             case US_WIE:
-                if(usun_wierzcholek(pierwszy, etWie1) == RM_NODE_FAIL) printf("Fail\n");
+                if(usun_wierzcholek(&pierwszy, etWie1) == RM_NODE_FAIL) printf("Fail\n");
                 else printf("Success\n");
                 break;
 
