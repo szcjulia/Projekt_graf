@@ -1,7 +1,8 @@
 #ifndef KOLOROWANIE_H
 #define KOLOROWANIE_H
 
+#include "graf.h"
 
-int hello_kolorowanie();
+void kolorowanie(Wierzcholek* pierwszy_wierzcholek);
 
 #endif //KOLOROWANIE_H

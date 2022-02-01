@@ -11,10 +11,11 @@
 #define NIEPRAWIDLOWY_INPUT (-1)
 #define DOD_WIE 1
 #define DOD_KRA 2
+#define KOLOR 3
 
 #define EXIT 9
 #define DODAJ 10
-
+#define KOLORUJ 11
 
 char* usuwanie_spacji(char* linijka);
 char* zamiana_interpunkcji_na_spacje(char* linijka);

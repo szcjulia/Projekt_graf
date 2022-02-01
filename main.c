@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include "graf.h"
 #include "obsluga_wejscia.h"
+#include "kolorowanie.h"
 
 int main(){
 
@@ -21,13 +22,17 @@ int main(){
         switch (opcja)
         {
             case DOD_WIE:
-                if(dodaj_wierzcholek(&pierwszy, etWie1) == ADD_NODE_FAIL) printf("Fail");
-                else printf("Success");
+                if(dodaj_wierzcholek(&pierwszy, etWie1) == ADD_NODE_FAIL) printf("Fail\n");
+                else printf("Success\n");
                 break;
 
             case DOD_KRA:
-                if(dodaj_krawedz(pierwszy, etWie1, etWie2) == ADD_EDGE_FAIL) printf("Fail");
-                else printf("Success");
+                if(dodaj_krawedz(pierwszy, etWie1, etWie2) == ADD_EDGE_FAIL) printf("Fail\n");
+                else printf("Success\n");
+                break;
+
+            case KOLOR:
+                kolorowanie(pierwszy);
                 break;
 
             case EXIT:

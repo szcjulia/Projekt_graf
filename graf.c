@@ -28,6 +28,7 @@ int dodaj_wierzcholek(Wierzcholek** pierwszy_wierzcholek, uint32_t etykieta) {
     if(nowyWierzcholek!= NULL){
         nowyWierzcholek->nastepny_wierzcholek = *pierwszy_wierzcholek;
         nowyWierzcholek->etykieta = etykieta;
+        nowyWierzcholek->kolor = -1; // -1 oznacza niepokolorowany
         nowyWierzcholek->pierwszy_sasiad = NULL;
         *pierwszy_wierzcholek = nowyWierzcholek;
         return ADD_NODE_SUCCESS;
@@ -60,27 +61,41 @@ int dodaj_krawedz(Wierzcholek* pierwszy, uint32_t etykieta_wierzcholka1, uint32_
 
     if(czy_sasiad(wierzcholek1, wierzcholek2-> etykieta) || czy_sasiad(wierzcholek2, wierzcholek1-> etykieta)){
         return ADD_EDGE_FAIL;
-    } 
-
-    Wierzcholek* obecny_sasiad = wierzcholek1-> pierwszy_sasiad-> wierzcholek;
+    }
 
     Sasiad *nowy_sasiad1 = (Sasiad*)malloc(sizeof(Sasiad));
     Sasiad *nowy_sasiad2 = (Sasiad*)malloc(sizeof(Sasiad));
 
     if(nowy_sasiad1 != NULL){
         nowy_sasiad1-> wierzcholek = wierzcholek2;
-        while(wierzcholek1-> pierwszy_sasiad-> wierzcholek != NULL){
-            wierzcholek1->pierwszy_sasiad = wierzcholek1->pierwszy_sasiad->nastepny_sasiad;
+        nowy_sasiad1-> nastepny_sasiad = NULL;
+
+        if (wierzcholek1->pierwszy_sasiad == NULL) {
+            wierzcholek1->pierwszy_sasiad = nowy_sasiad1;
+        } else {
+            Sasiad* ostatni_sasiad = wierzcholek1->pierwszy_sasiad;
+            while (ostatni_sasiad->nastepny_sasiad != NULL) {
+                ostatni_sasiad = ostatni_sasiad->nastepny_sasiad;
+            }
+            ostatni_sasiad->nastepny_sasiad = nowy_sasiad1;
         }
-        wierzcholek1->pierwszy_sasiad->nastepny_sasiad = nowy_sasiad1;
     }
     if(nowy_sasiad2 != NULL){
         nowy_sasiad2-> wierzcholek = wierzcholek1;
-        while(wierzcholek2-> pierwszy_sasiad-> wierzcholek != NULL){
-            wierzcholek2->pierwszy_sasiad = wierzcholek2->pierwszy_sasiad->nastepny_sasiad;
+        nowy_sasiad2-> nastepny_sasiad = NULL;
+
+        if (wierzcholek2->pierwszy_sasiad == NULL) {
+            wierzcholek2->pierwszy_sasiad = nowy_sasiad2;
         }
-        wierzcholek2->pierwszy_sasiad->nastepny_sasiad = nowy_sasiad2;
+        else {
+            Sasiad* ostatni_sasiad = wierzcholek2->pierwszy_sasiad;
+            while (ostatni_sasiad->nastepny_sasiad != NULL) {
+                ostatni_sasiad = ostatni_sasiad->nastepny_sasiad;
+            }
+            ostatni_sasiad->nastepny_sasiad = nowy_sasiad2;
+        }
     }
+    return ADD_EDGE_SUCCESS;
 }
 
 void usun_wierzcholek(){
