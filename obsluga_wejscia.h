@@ -11,10 +11,13 @@
 #define DOD_WIE 1
 #define DOD_KRA 2
 #define KOLOR 3
+#define US_KRA 4
+#define US_WIE 5
 
 #define EXIT 9
 #define DODAJ 10
 #define KOLORUJ 11
+#define USUN 12
 
 char* usuwanie_spacji(char* linijka);
 char* zamiana_interpunkcji_na_spacje(char* linijka);

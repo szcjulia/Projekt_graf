@@ -91,8 +91,17 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2, char* nazwaPl
                         return;
                     }
                     *opcja = NIEPRAWIDLOWY_INPUT;
-                    printf("Niepoprawne argumenty!\n");
-                    return;
+                    break;
+                case USUN:
+                    if(3 == sscanf(linia, "%s %lu %lu", slowo, etWie1, etWie2)){
+                        *opcja = US_KRA;
+                        return;
+                    }
+                    if (2 == sscanf(linia, "%s %lu", slowo, etWie1))
+                    {
+                        *opcja = US_WIE;
+                        return;
+                    }
                 case KOLORUJ:
                     if (2 == sscanf(linia, "%s %s", slowo, nazwaPliku))
                     {
@@ -100,11 +109,9 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2, char* nazwaPl
                         return;
                     }
                     *opcja = NIEPRAWIDLOWY_INPUT;
-                    printf("Niepoprawne argumenty!\n");
-                    return;
+                    break;
                 default:
                     *opcja = NIEPRAWIDLOWY_INPUT;
-                    printf("Nieznane polecenie!\n");
                     break;
             }
         }
@@ -114,8 +121,9 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2, char* nazwaPl
 int czytaj_opcje(char* slowo)
 {
     if (!strcmp(slowo, "Exit")) return EXIT; 
-    if (!strcmp(slowo, "A")) return DODAJ;
+    if (!strcmp(slowo, "A")) return DODAJ; 
     if (!strcmp(slowo, "Colors")) return KOLORUJ; 
+    if (!strcmp(slowo, "D")) return USUN;
 
     else return NIEPRAWIDLOWY_INPUT;
 }

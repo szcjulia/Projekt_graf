@@ -116,7 +116,7 @@ int usun_sasiada(Wierzcholek *wierzcholek1, Wierzcholek *wierzcholek2)
     return RM_NEIGH_FAIL;
 }
 
-void usun_krawedz(Wierzcholek *pierwszy, uint32_t etWie1, uint32_t etWie2){
+int usun_krawedz(Wierzcholek *pierwszy, uint32_t etWie1, uint32_t etWie2){
 
     Wierzcholek *wierzcholek1 = znajdz_wierzcholek(pierwszy, etWie1);
     Wierzcholek *wierzcholek2 = znajdz_wierzcholek(pierwszy, etWie2);
@@ -131,3 +131,41 @@ void usun_krawedz(Wierzcholek *pierwszy, uint32_t etWie1, uint32_t etWie2){
 
 }
 
+int usun_wierzcholek(Wierzcholek **pierwszy, uint32_t etykieta_usun){
+    Wierzcholek *wierzcholek_usun = znajdz_wierzcholek(*pierwszy, etykieta_usun); 
+    if(!wierzcholek_usun) 
+    {
+        return RM_NODE_FAIL;
+    }
+    Wierzcholek *obecny_wierzcholek = *pierwszy;
+    while(obecny_wierzcholek) 
+    {
+        if(czy_sasiad(obecny_wierzcholek, etykieta_usun))
+            if(usun_sasiada(obecny_wierzcholek, wierzcholek_usun) == RM_NEIGH_FAIL) return RM_NODE_FAIL;
+        
+        obecny_wierzcholek = obecny_wierzcholek->nastepny_wierzcholek;
+    }
+
+    Sasiad *obecny_sasiad = wierzcholek_usun->pierwszy_sasiad;
+    Sasiad *roboczy_sasiad = NULL;
+    while(obecny_sasiad) 
+    {
+        roboczy_sasiad = obecny_sasiad->nastepny_sasiad;
+        free(obecny_sasiad);
+        obecny_sasiad = roboczy_sasiad;
+    }
+
+    obecny_wierzcholek = *pierwszy;
+    while(obecny_wierzcholek)
+    {
+        if(obecny_wierzcholek == wierzcholek_usun)
+        {
+            *pierwszy = wierzcholek_usun->nastepny_wierzcholek;
+            free(wierzcholek_usun);
+            return RM_NODE_SUCCESS;
+        }
+
+        obecny_wierzcholek = obecny_wierzcholek->nastepny_wierzcholek;
+    }
+    return RM_NODE_FAIL;
+}
