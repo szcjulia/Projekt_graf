@@ -91,7 +91,8 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2, char* nazwaPl
                         return;
                     }
                     *opcja = NIEPRAWIDLOWY_INPUT;
-                    break;
+                    printf("Niepoprawne argumenty!\n");
+                    return;
                 case KOLORUJ:
                     if (2 == sscanf(linia, "%s %s", slowo, nazwaPliku))
                     {
@@ -99,9 +100,11 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2, char* nazwaPl
                         return;
                     }
                     *opcja = NIEPRAWIDLOWY_INPUT;
-                    break;
+                    printf("Niepoprawne argumenty!\n");
+                    return;
                 default:
                     *opcja = NIEPRAWIDLOWY_INPUT;
+                    printf("Nieznane polecenie!\n");
                     break;
             }
         }
