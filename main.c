@@ -14,10 +14,11 @@ int main(){
     Wierzcholek *pierwszy = NULL;
     uint32_t etWie1 = 0;
     uint32_t etWie2 = 0;
+    char nazwaPliku[ROZM_NAZWY_PLIKU];
 
     for(;;)
     {
-        opcja = wybor(&etWie1, &etWie2);
+        opcja = wybor(&etWie1, &etWie2, nazwaPliku);
         
         switch (opcja)
         {
@@ -32,7 +33,7 @@ int main(){
                 break;
 
             case KOLOR:
-                kolorowanie(pierwszy);
+                kolorowanie(pierwszy, nazwaPliku);
                 break;
 
             case EXIT:

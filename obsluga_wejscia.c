@@ -44,18 +44,18 @@ void bledne_wprowadzenie_funkcji(){
 			printf("Bląd wprowadzenie pamieci!\n");
 }
 
-int wybor(uint32_t* etWie1, uint32_t* etWie2){
+int wybor(uint32_t* etWie1, uint32_t* etWie2, char* nazwaPliku){
     int opcja = NIEPRAWIDLOWY_INPUT;
 
     for(;;)
     {
-        wybierz_opcje(&opcja, etWie1, etWie2);
+        wybierz_opcje(&opcja, etWie1, etWie2, nazwaPliku);
         if(opcja != NIEPRAWIDLOWY_INPUT) return opcja;
     } 
 }
 
 
-void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2)
+void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2, char* nazwaPliku)
 {
     char slowo[ROZM_SLOWA];
     char linia[ROZM_LINII];
@@ -65,7 +65,7 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2)
 
         if (sscanf(linia, "%s", slowo)) 
         {
-            if (strcmp(slowo, "colors") && strcmp(slowo, "bin") && strcmp(slowo, "list") && strcmp(slowo, "exec"))
+            if (strcmp(slowo, "Colors") && strcmp(slowo, "Bin") && strcmp(slowo, "List") && strcmp(slowo, "Exec"))
             {
                 usuwanie_spacji(linia);
                 zamiana_interpunkcji_na_spacje(linia);
@@ -85,7 +85,7 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2)
                         *opcja = DOD_KRA;
                         return;
                     }
-                    if (2 == sscanf(linia, "%s %lu", slowo, etWie1, etWie2))
+                    if (2 == sscanf(linia, "%s %lu", slowo, etWie1))
                     {
                         *opcja = DOD_WIE;
                         return;
@@ -93,8 +93,13 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2)
                     *opcja = NIEPRAWIDLOWY_INPUT;
                     break;
                 case KOLORUJ:
-                    *opcja = KOLOR;
-                    return;
+                    if (2 == sscanf(linia, "%s %s", slowo, nazwaPliku))
+                    {
+                        *opcja = KOLOR;
+                        return;
+                    }
+                    *opcja = NIEPRAWIDLOWY_INPUT;
+                    break;
                 default:
                     *opcja = NIEPRAWIDLOWY_INPUT;
                     break;
@@ -105,9 +110,9 @@ void wybierz_opcje(int* opcja, uint32_t* etWie1, uint32_t* etWie2)
 
 int czytaj_opcje(char* slowo)
 {
-    if (!strcmp(slowo, "exit")) return EXIT; 
-    if (!strcmp(slowo, "a")) return DODAJ;
-    if (!strcmp(slowo, "colors")) return KOLORUJ; 
+    if (!strcmp(slowo, "Exit")) return EXIT; 
+    if (!strcmp(slowo, "A")) return DODAJ;
+    if (!strcmp(slowo, "Colors")) return KOLORUJ; 
 
     else return NIEPRAWIDLOWY_INPUT;
 }

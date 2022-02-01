@@ -3,6 +3,6 @@
 
 #include "graf.h"
 
-void kolorowanie(Wierzcholek* pierwszy_wierzcholek);
+void kolorowanie(Wierzcholek* pierwszy_wierzcholek, char* nazwaPliku);
 
 #endif //KOLOROWANIE_H
